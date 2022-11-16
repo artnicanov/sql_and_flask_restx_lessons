@@ -64,7 +64,7 @@ class BooksView(Resource):
 @book_ns.route('/<int:bid>')
 class BookView(Resource):
 	def get(self, bid:int):
-		book = Book.query.get(bid)
+		book = db.session.query(Book).filter(Book.id == bid).one()
 		return book_schema.dump(book), 200
 
 
